@@ -40,7 +40,14 @@ const Contacto = () => {
             </h2>
           </div>
         </div>
-        <div className="-mt-16 mb-8 px-8 ">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          variants={sectionVariants}
+          className="-mt-16 mb-8 px-8 "
+        >
           <div className="container mx-auto">
             <div className="py-12 grid lg:grid-cols-2 gap-3  justify-center rounded-xl border border-white bg-white shadow-md shadow-black/5 saturate-200">
               <div className="my-8 grid  px-4 ">
@@ -104,14 +111,7 @@ const Contacto = () => {
                   }}
                   className="w-full h-full"
                 >
-                  <motion.div
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    variants={sectionVariants}
-                    className="pt-4 grid grid-cols-1 lg:grid-cols-2 gap-4"
-                  >
+                  <div className="pt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
                     <div className="space-y-2 ">
                       <Label htmlFor="NombreCompleto" className="">
                         Nombre Completo
@@ -188,7 +188,7 @@ const Contacto = () => {
                         minLength="10"
                       />
                     </div>
-                  </motion.div>
+                  </div>
 
                   <div className="my-2 w-1/2 lg:w-1/4">
                     <Button> Enviar mensaje</Button>
@@ -197,7 +197,7 @@ const Contacto = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
     </div>
   );
