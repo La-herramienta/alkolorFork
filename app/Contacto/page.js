@@ -108,6 +108,8 @@ const Contacto = () => {
                   onSubmit={(e) => {
                     e.preventDefault();
                     alert("Mensaje enviado");
+
+                    e.target.reset();
                   }}
                   className="w-full h-full"
                 >
