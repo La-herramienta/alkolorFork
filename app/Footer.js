@@ -14,12 +14,10 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="border-t   py-6 px-4 lg:px-0  ">
+      <footer className="border-t bg-Principal text-white py-6 px-4 lg:px-0  ">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-4 items-center sm:items-start">
           <div className=" lg:mx-auto  ">
-            <h1 className="font-semibold mb-2 text-xl text-Secundario">
-              Páginas de interés{" "}
-            </h1>
+            <h1 className="font-semibold mb-2 text-xl ">Páginas de interés </h1>
             <hr className="mb-2" />
             <div className="space-y-2">
               <div className="flex space-x-2 items-center ">
@@ -46,7 +44,7 @@ const Footer = () => {
             </div>
           </div>
           <div className=" lg:mx-auto  ">
-            <h1 className="font-semibold mb-2 text-xl uppercase text-Secundario">
+            <h1 className="font-semibold mb-2 text-xl uppercase ">
               Sobre nosotros
             </h1>
             <hr className="mb-2" />
@@ -108,7 +106,7 @@ const Footer = () => {
               <hr className=" py-2 border-gray-300" />
               <div className="flex  flex-wrap items-center md:justify-between justify-center">
                 <div className="w-full  px-4 mx-auto text-center">
-                  <div className="text-sm font-semibold text-Secundario ">
+                  <div className="text-sm font-semibold  ">
                     Copyright ©{" "}
                     <span id="get-current-year">
                       {new Date().getFullYear()}
