@@ -165,9 +165,23 @@ const HomgePage = () => {
                   <Link
                     href={`/Productos?Categoria=${categoria?.id}`}
                     key={index}
-                    className="  relative "
+                    className="   "
                   >
-                    <div className="  h-full relative   overflow-hidden group ">
+                    <motion.div
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      transition={{
+                        delay: index * 0.2,
+                        duration: 0.6,
+                        ease: "easeOut",
+                      }}
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.9, y: 50 },
+                        visible: { opacity: 1, scale: 1, y: 0 },
+                      }}
+                      className="  h-full relative   overflow-hidden group "
+                    >
                       <div className=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-Principal transition-all ease-in-out duration-500  ">
                         <div className="w-full h-full   p-5   relative">
                           <div className="absolute bottom-0 group-hover:bottom-24 text-white  text-left   transition-all ease-in-out duration-500 ">
@@ -188,13 +202,26 @@ const HomgePage = () => {
                           className="w-full z-0  h-full object-contain  "
                         />
                       )}
-                    </div>
+                    </motion.div>
                   </Link>
                 ))}
               </div>
             </div>
 
-            <div className="">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+              variants={{
+                hidden: { opacity: 0, scale: 0.9, y: 50 },
+                visible: { opacity: 1, scale: 1, y: 0 },
+              }}
+              className=""
+            >
               <div className="space-y-4">
                 <div className=" max-w-2xl text-center mx-auto">
                   <h1 className="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl ">
@@ -213,44 +240,60 @@ const HomgePage = () => {
                   );
 
                   return (
-                    <Link
-                      href={`/Productos?ProductoId=${item.id}`}
+                    <motion.div
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      transition={{
+                        delay: index * 0.2,
+                        duration: 0.6,
+                        ease: "easeOut",
+                      }}
+                      variants={{
+                        hidden: { opacity: 0, scale: 0.9, y: 50 },
+                        visible: { opacity: 1, scale: 1, y: 0 },
+                      }}
                       key={item.id}
-                      className="w-full mx-auto"
+                      className="w-full"
                     >
-                      <div className="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]"></div>
-                      <div className="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">
-                        {ImagenesFormated?.length > 0 && (
-                          <div className=" text-gray-700 bg-white bg-clip-border rounded-xl h-64">
-                            <img
-                              src={
-                                ImagenesFormated[0].url || ImagenesFormated[0]
-                              }
-                              alt="card-image"
-                              className="object-contain w-full h-full"
+                      <Link
+                        href={`/Productos?ProductoId=${item.id}`}
+                        className="w-full mx-auto"
+                      >
+                        <div className="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]"></div>
+                        <div className="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">
+                          {ImagenesFormated?.length > 0 && (
+                            <div className=" text-gray-700 bg-white bg-clip-border rounded-xl h-64">
+                              <img
+                                src={
+                                  ImagenesFormated[0].url || ImagenesFormated[0]
+                                }
+                                alt="card-image"
+                                className="object-contain w-full h-full"
+                              />
+                            </div>
+                          )}
+
+                          <div className="p-6">
+                            <div className="flex items-center justify-between mb-2">
+                              <p className="block font-sans text-base antialiased font-bold leading-relaxed text-blue-gray-900">
+                                {item.NombreProducto}
+                              </p>
+                            </div>
+                            <div
+                              className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-80"
+                              dangerouslySetInnerHTML={{
+                                __html: item.Description,
+                              }}
                             />
                           </div>
-                        )}
-
-                        <div className="p-6">
-                          <div className="flex items-center justify-between mb-2">
-                            <p className="block font-sans text-base antialiased font-bold leading-relaxed text-blue-gray-900">
-                              {item.NombreProducto}
-                            </p>
-                          </div>
-                          <div
-                            className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-80"
-                            dangerouslySetInnerHTML={{
-                              __html: item.Description,
-                            }}
-                          />
                         </div>
-                      </div>
-                    </Link>
+                      </Link>
+                    </motion.div>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-white  ">
