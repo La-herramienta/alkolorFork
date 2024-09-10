@@ -188,6 +188,7 @@ const Contacto = () => {
                         required
                         autoComplete="off"
                         minLength="10"
+                        placeholder="Escribe tu mensaje ..."
                       />
                     </div>
                   </div>
