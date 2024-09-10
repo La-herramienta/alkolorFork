@@ -109,7 +109,7 @@ const HomgePage = () => {
           <div className="space-y-4">
             <div className=" max-w-2xl text-center mx-auto">
               <h1 className="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl ">
-                Nuestros productos
+                Nuestros Productos
               </h1>
             </div>
             <div className=" max-w-3xl mx-auto">
@@ -121,8 +121,8 @@ const HomgePage = () => {
           </div>
           <div className="grid grid-cols-1 gap-6   lg:grid-cols-4">
             {Categorias?.map((categoria, index) => (
-              <Link href={"#"} key={index} className=" shadow-2xl relative ">
-                <div className="  h-full relative shadow-2xl  overflow-hidden group ">
+              <Link href={"#"} key={index} className="  relative ">
+                <div className="  h-full relative   overflow-hidden group ">
                   <div className=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-Principal transition-all ease-in-out duration-500  ">
                     <div className="w-full h-full   p-5   relative">
                       <div className="absolute bottom-0 group-hover:bottom-24 text-white  text-left   transition-all ease-in-out duration-500 ">
@@ -149,7 +149,7 @@ const HomgePage = () => {
           <div className="space-y-4">
             <div className=" max-w-2xl text-center mx-auto">
               <h1 className="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl ">
-                Los más vendidos
+                Los más vendido
               </h1>
             </div>
           </div>
