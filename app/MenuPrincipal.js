@@ -31,7 +31,7 @@ const MenuPrincipal = () => {
         variants={fadeInVariants}
         transition={{ duration: 0.8, delay: 0.4 }}
         // style={{ filter: "drop-shadow(0px 0px 3px black)" }}
-        className={`sticky z-50 top-0 p-2 md:px-10 shadow-sm md:flex md:items-center md:justify-between   bg-white    `}
+        className={`sticky z-50 top-0 p-2 md:px-10 shadow-sm md:flex md:items-center md:justify-between   bg-Principal text-white    `}
       >
         <div className="flex justify-between items-center   ">
           {/* Escudo Logo "inicio" */}
@@ -78,11 +78,11 @@ const MenuPrincipal = () => {
             </ItemMenu>
 
             <ItemMenu
-              ruta="/Marcas"
+              ruta="/Productos"
               setIsOpen={setIsOpen}
-              border={pathname == "/Marcas" ? true : false}
+              border={pathname == "/Productos" ? true : false}
             >
-              Marcas
+              Productos
             </ItemMenu>
             <ItemMenu
               ruta="/Nosotros"
