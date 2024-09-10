@@ -1,11 +1,50 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { collection, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "@/firebase/firebaseClient";
 
 const HomgePage = () => {
+  const [Categorias, setCategorias] = useState([]);
+  const [Productos, setProductos] = useState([]);
+  console.log("Cate", Categorias);
+
+  useEffect(() => {
+    const categoriasRef = collection(db, "Categorias");
+    const unsubscribeCategorias = onSnapshot(categoriasRef, (snapshot) => {
+      setCategorias(
+        snapshot?.docs?.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+      );
+    });
+
+    const ProductoRef = query(
+      collection(db, "Productos"),
+      where("Recomendado", "==", true)
+    );
+
+    const unsubscribeProductos = onSnapshot(ProductoRef, (snapshot) => {
+      setProductos(
+        snapshot?.docs?.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+      );
+    });
+    // Cleanup function to unsubscribe from the snapshot listener
+
+    return () => {
+      unsubscribeCategorias(); // Desuscribirse al desmontar el componente
+      unsubscribeProductos();
+    };
+  }, []);
+
   const BannerInicio = [
     {
       imagen:
@@ -22,27 +61,27 @@ const HomgePage = () => {
     visible: { opacity: 1 },
   };
 
-  const Categorias = [
-    {
-      nombre: "Hogar",
-      imagen:
-        "https://www.pintuco.com.co/wp-content/uploads/2019/12/hogar.webp",
-    },
-    {
-      nombre: "Construcción",
-      imagen: `https://www.pintuco.com.co/wp-content/uploads/2019/12/construccion.webp`,
-    },
-    {
-      nombre: "Automotriz",
-      imagen:
-        "https://www.pintuco.com.co/wp-content/uploads/2019/12/automotriz.webp",
-    },
-    {
-      nombre: "Industrial",
-      imagen:
-        "https://www.pintuco.com.co/wp-content/uploads/2019/12/industrial.webp",
-    },
-  ];
+  // const Categorias = [
+  //   {
+  //     nombre: "Hogar",
+  //     imagen:
+  //       "https://www.pintuco.com.co/wp-content/uploads/2019/12/hogar.webp",
+  //   },
+  //   {
+  //     nombre: "Construcción",
+  //     imagen: `https://www.pintuco.com.co/wp-content/uploads/2019/12/construccion.webp`,
+  //   },
+  //   {
+  //     nombre: "Automotriz",
+  //     imagen:
+  //       "https://www.pintuco.com.co/wp-content/uploads/2019/12/automotriz.webp",
+  //   },
+  //   {
+  //     nombre: "Industrial",
+  //     imagen:
+  //       "https://www.pintuco.com.co/wp-content/uploads/2019/12/industrial.webp",
+  //   },
+  // ];
 
   return (
     <div>
@@ -104,84 +143,133 @@ const HomgePage = () => {
         ))}
       </Carousel>
 
-      <div className="container mx-auto my-4 space-y-6">
-        <div className="  ">
-          <div className="space-y-4">
-            <div className=" max-w-2xl text-center mx-auto">
-              <h1 className="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl ">
-                Nuestros Productos
-              </h1>
-            </div>
-            <div className=" max-w-3xl mx-auto">
-              <p className="text-lg text-gray-600  text-center">
-                Queremos facilitar tu experiencia a la hora de comprar. Haz clic
-                de acuerdo a lo que necesitas
-              </p>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 gap-6   lg:grid-cols-4">
-            {Categorias?.map((categoria, index) => (
-              <Link href={"#"} key={index} className="  relative ">
-                <div className="  h-full relative   overflow-hidden group ">
-                  <div className=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-Principal transition-all ease-in-out duration-500  ">
-                    <div className="w-full h-full   p-5   relative">
-                      <div className="absolute bottom-0 group-hover:bottom-24 text-white  text-left   transition-all ease-in-out duration-500 ">
-                        <h2 className="text-2xl font-bold  text-white mb-0 pb-1">
-                          {categoria.nombre}
-                        </h2>
-                        <p className="text-lg font-light text-white">
-                          Lorem ipsum dolor sit amet, #brands.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <img
-                    src={categoria.imagen}
-                    className="w-full z-0  h-full object-contain  "
-                  />
+      <div className="space-y-5">
+        <div className="bg-gray-50 ">
+          <div className="container mx-auto my-4 space-y-6 ">
+            <div className="  ">
+              <div className="space-y-4">
+                <div className=" max-w-2xl text-center mx-auto">
+                  <h1 className="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl ">
+                    Nuestros Productos
+                  </h1>
                 </div>
-              </Link>
-            ))}
+                <div className=" max-w-3xl mx-auto">
+                  <p className="text-lg text-gray-600  text-center">
+                    Queremos facilitar tu experiencia a la hora de comprar. Haz
+                    clic de acuerdo a lo que necesitas
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 gap-6   lg:grid-cols-4">
+                {Categorias?.map((categoria, index) => (
+                  <Link
+                    href={`/Productos?Categoria=${categoria?.id}`}
+                    key={index}
+                    className="  relative "
+                  >
+                    <div className="  h-full relative   overflow-hidden group ">
+                      <div className=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-Principal transition-all ease-in-out duration-500  ">
+                        <div className="w-full h-full   p-5   relative">
+                          <div className="absolute bottom-0 group-hover:bottom-24 text-white  text-left   transition-all ease-in-out duration-500 ">
+                            <h2 className="text-2xl font-bold  text-white mb-0 pb-1">
+                              {categoria.NombreCategoria || ""}
+                            </h2>
+                            {categoria?.Descripcion && (
+                              <p className="text-lg font-light text-white">
+                                {categoria.Descripcion || "lorem ipsum"}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      {categoria?.Imagenes?.length && (
+                        <img
+                          src={categoria.Imagenes[0]}
+                          className="w-full z-0  h-full object-contain  "
+                        />
+                      )}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="">
+              <div className="space-y-4">
+                <div className=" max-w-2xl text-center mx-auto">
+                  <h1 className="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl ">
+                    Los más vendido
+                  </h1>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-4 gap-4">
+                {Productos?.map((item, index) => {
+                  const Imagenes =
+                    item?.ImagenesGenerales.concat(item?.Variantes) || [];
+
+                  const ImagenesFormated = Imagenes.filter(
+                    (imagen) => imagen.url || imagen.length > 0
+                  );
+
+                  return (
+                    <Link
+                      href={`/Productos?ProductoId=${item.id}`}
+                      key={item.id}
+                      className="w-full mx-auto"
+                    >
+                      <div className="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]"></div>
+                      <div className="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">
+                        {ImagenesFormated?.length > 0 && (
+                          <div className=" text-gray-700 bg-white bg-clip-border rounded-xl h-64">
+                            <img
+                              src={
+                                ImagenesFormated[0].url || ImagenesFormated[0]
+                              }
+                              alt="card-image"
+                              className="object-contain w-full h-full"
+                            />
+                          </div>
+                        )}
+
+                        <div className="p-6">
+                          <div className="flex items-center justify-between mb-2">
+                            <p className="block font-sans text-base antialiased font-bold leading-relaxed text-blue-gray-900">
+                              {item.NombreProducto}
+                            </p>
+                          </div>
+                          <div
+                            className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-80"
+                            dangerouslySetInnerHTML={{
+                              __html: item.Description,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="">
-          <div className="space-y-4">
-            <div className=" max-w-2xl text-center mx-auto">
-              <h1 className="block font-semibold text-gray-800 text-4xl md:text-5xl lg:text-6xl ">
-                Los más vendido
-              </h1>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-white  ">
+          <div>
+            <img
+              src="https://www.pintuco.com.co/wp-content/uploads/2024/02/roller-brush-wall-with-blue-paint-apartment-redecoration-home-construction-while-renovating-improving-repair-decorating-1-1.webp"
+              alt="Imagen"
+            />
           </div>
+          <div className="text-center space-y-10 flex flex-col justify-center max-w-sm mx-auto items-center">
+            <h1 className="block font-bold text-gray-800 text-2xl lg:text-3xl ">
+              ¡Dale vida a tu hogar con los colores Pintuco!
+            </h1>
+            <p>
+              Escoge los colores que más te gusten y crea miles de combinaciones
+              para que escojas la que más se adapte a ti.
+            </p>
 
-          <div className="grid grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((item, index) => (
-              <>
-                <div className="w-full mx-auto">
-                  <div className="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]"></div>
-                  <div className="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">
-                    <div className=" text-gray-700 bg-white bg-clip-border rounded-xl h-64">
-                      <img
-                        src="https://www.pintuco.com.co/wp-content/uploads/2021/06/viniltex-biocuidado-1GL-COL-2024-web.png"
-                        alt="card-image"
-                        className="object-contain w-full h-full"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900">
-                          Apple AirPods
-                        </p>
-                      </div>
-                      <p className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
-                        With plenty of talk and listen time, voice-activated
-                        Siri access, and an available wireless charging case.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </>
-            ))}
+            <Button>Conoce Más</Button>
           </div>
         </div>
       </div>

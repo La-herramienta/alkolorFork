@@ -16,6 +16,17 @@ const Footer = () => {
     <>
       <footer className="border-t bg-Principal text-white py-6 px-4 lg:px-0  ">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 justify-center gap-4 items-center sm:items-start">
+          <div className="lg:mx-auto">
+            <Link className="flex" href="/" title="Ir a inicio">
+              <Image
+                src="/LOGO.svg"
+                width={200}
+                height={10}
+                alt="Logotype"
+                className="object-contain"
+              />
+            </Link>
+          </div>
           <div className=" lg:mx-auto  ">
             <h1 className="font-semibold mb-2 text-xl ">Páginas de interés </h1>
             <hr className="mb-2" />

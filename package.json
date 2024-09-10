@@ -19,6 +19,7 @@
     "@tanstack/react-table": "^8.20.5",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "embla-carousel-react": "^8.2.1",
     "firebase": "^10.13.0",
     "firebase-admin": "^12.4.0",
     "framer-motion": "^11.3.29",
@@ -28,6 +29,7 @@
     "react-dom": "^18",
     "react-dropzone": "^14.2.3",
     "react-phone-number-input": "^3.4.5",
+    "react-quill": "^2.0.0",
     "react-responsive-carousel": "^3.2.23",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"

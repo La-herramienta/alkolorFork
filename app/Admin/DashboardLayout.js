@@ -15,6 +15,7 @@ import {
   GalleryHorizontal,
   HistoryIcon,
   MonitorXIcon,
+  ShoppingBasket,
   Users,
   Utensils,
   YoutubeIcon,
@@ -66,10 +67,14 @@ const DashboardLayout = ({ children }) => {
       hidden: claims?.Rol?.includes("Admin") ? false : true,
     },
     {
-      name: "Marcas",
-      link: "/Admin/Marcas",
+      name: "Categorias",
+      link: "/Admin/Categorias",
       icon: <FileHeart className="w-6 h-6 text-white" />,
-      hidden: claims?.Rol?.includes("Admin") ? false : true,
+    },
+    {
+      name: "Productos",
+      link: "/Admin/Productos",
+      icon: <ShoppingBasket className="w-6 h-6 text-white" />,
     },
   ];
 
@@ -82,7 +87,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <div>
       <div className="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50  text-black ">
-        <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-black  h-full text-white transition-all duration-300 border-none z-10 sidebar">
+        <div className="fixed flex flex-col left-0 w-14 hover:w-64 md:w-64 bg-Principal  h-full text-white transition-all duration-300 border-none z-10 sidebar">
           <div className="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
             <ul className="flex flex-col py-4 space-y-1">
               <li>
@@ -116,7 +121,7 @@ const DashboardLayout = ({ children }) => {
                         href={men.link}
                         className={` flex flex-row items-center h-11 focus:outline-none hover:bg-yellow-800  text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-yellow-600  pr-6 ${
                           pathname.includes(men.link) &&
-                          "bg-yellow-800 border-yellow-600 "
+                          "bg-Secundario border-Secundario "
                         }`}
                       >
                         <span className="inline-flex justify-center items-center ml-4">

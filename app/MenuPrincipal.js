@@ -37,7 +37,7 @@ const MenuPrincipal = () => {
           {/* Escudo Logo "inicio" */}
           <Link className="flex" href="/" title="Ir a inicio">
             <Image
-              src="/Logo.svg"
+              src="/LOGO.svg"
               width={130}
               height={60}
               alt="Logotype"

@@ -1,19 +1,18 @@
 "use client";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "@/firebase/firebaseClient";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [InputValue, setInputValue] = useState({});
-  const [ModalNewUser, setModalNewUser] = useState(false);
   const { toast } = useToast();
 
   const onSubmit = (e) => {
     e.preventDefault();
-
+    debugger;
     signInWithEmailAndPassword(auth, InputValue?.Usuario, InputValue?.Password)
       .then((userCredential) => {
         // Signed in

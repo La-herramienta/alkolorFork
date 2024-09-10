@@ -15,8 +15,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useToast } from "@/components/ui/use-toast";
 import { db } from "@/firebase/firebaseClient";
+import { useToast } from "@/hooks/use-toast";
 import { collection, onSnapshot } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 
