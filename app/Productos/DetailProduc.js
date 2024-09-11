@@ -28,14 +28,14 @@ const DetailProduc = (producto) => {
         }}
         className="mt-1 p-2 cursor-pointer"
       >
-        <h2 className="text-gray-700 font-semibold uppercase">
+        <h2 className="text-base antialiased font-bold leading-relaxed text-gray-900">
           {producto?.NombreProducto}
         </h2>
         {/* <p className="mt-1 text-sm text-gray-500 line-clamp-3">
                                       
                                     </p> */}
         <div
-          className="line-clamp-4 mt-1 text-sm text-gray-500 "
+          className="line-clamp-4 mt-1 text-sm text-gray-600 "
           dangerouslySetInnerHTML={{
             __html: producto?.Description || "",
           }}

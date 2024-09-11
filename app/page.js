@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { collection, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "@/firebase/firebaseClient";
+import CarrouselProductosImagenes from "./Productos/CarrouselProductosImagenes";
 
 const HomgePage = () => {
   const [Categorias, setCategorias] = useState([]);
@@ -122,7 +123,7 @@ const HomgePage = () => {
                     A tu <span className=" uppercase"> Medida </span>
                   </motion.p>
 
-                  <Link href={"/Nosotros"} className="flex justify-start">
+                  <Link href={"/Productos"} className="flex justify-start">
                     <motion.div
                       className="group font-medium tracking-wide select-none text-base relative inline-flex items-center justify-start cursor-pointer sm:h-12 border-2 border-solid py-0 px-6 rounded-md overflow-hidden z-10 transition-all duration-300 ease-in-out outline-0 bg-transparent text-white border-Secundario   hover:bg-Secundario"
                       initial="hidden"
@@ -130,9 +131,7 @@ const HomgePage = () => {
                       variants={fadeInVariants}
                       transition={{ duration: 0.8, delay: 0.6 }}
                     >
-                      <strong className="font-bold uppercase">
-                        Quienes Somos
-                      </strong>
+                      <strong className="font-bold uppercase">Productos</strong>
                       <span className="absolute bg-Secundario bottom-0 w-0 left-1/2 h-full -translate-x-1/2 transition-all ease-in-out duration-300 group-hover:w-[105%] -z-[1] group-focus:w-[105%]" />
                     </motion.div>
                   </Link>
@@ -160,10 +159,10 @@ const HomgePage = () => {
                   </p>
                 </div>
               </div>
-              <div className="grid grid-cols-1 gap-6   lg:grid-cols-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6   lg:grid-cols-4">
                 {Categorias?.map((categoria, index) => (
                   <Link
-                    href={`/Productos?Categoria=${categoria?.id}`}
+                    href={`/Productos?Categoriaid=${categoria?.id}`}
                     key={index}
                     className="   "
                   >
@@ -185,21 +184,21 @@ const HomgePage = () => {
                       <div className=" absolute -bottom-10 group-hover:top-0 left-0 w-full h-full group-hover:bg-Principal transition-all ease-in-out duration-500  ">
                         <div className="w-full h-full   p-5   relative">
                           <div className="absolute bottom-0 group-hover:bottom-24 text-white  text-left   transition-all ease-in-out duration-500 ">
-                            <h2 className="text-2xl font-bold  text-white mb-0 pb-1">
+                            <h2 className="text-2xl font-bold  text-white mb-0 pb-1 uppercase">
                               {categoria.NombreCategoria || ""}
                             </h2>
-                            {categoria?.Descripcion && (
+                            {/* {categoria?.Descripcion && (
                               <p className="text-lg font-light text-white">
                                 {categoria.Descripcion || "lorem ipsum"}
                               </p>
-                            )}
+                            )} */}
                           </div>
                         </div>
                       </div>
                       {categoria?.Imagenes?.length && (
                         <img
                           src={categoria.Imagenes[0]}
-                          className="w-full z-0  h-full object-contain  "
+                          className="w-full z-0  h-full object-cover  "
                         />
                       )}
                     </motion.div>
@@ -230,10 +229,12 @@ const HomgePage = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 {Productos?.map((item, index) => {
-                  const Imagenes =
-                    item?.ImagenesGenerales.concat(item?.Variantes) || [];
+                  const Imagenes = [
+                    ...(item?.ImagenesGenerales || []),
+                    ...(item?.Variantes || []),
+                  ];
 
                   const ImagenesFormated = Imagenes.filter(
                     (imagen) => imagen.url || imagen.length > 0
@@ -254,41 +255,49 @@ const HomgePage = () => {
                         visible: { opacity: 1, scale: 1, y: 0 },
                       }}
                       key={item.id}
-                      className="w-full"
+                      className="w-full border-b border-slate-300 pt-2 h-full"
                     >
-                      <Link
-                        href={`/Productos?ProductoId=${item.id}`}
-                        className="w-full mx-auto"
-                      >
-                        <div className="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]"></div>
+                      <div className="w-full mx-auto">
                         <div className="flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-full">
                           {ImagenesFormated?.length > 0 && (
-                            <div className=" text-gray-700 bg-white bg-clip-border rounded-xl h-64">
-                              <img
-                                src={
-                                  ImagenesFormated[0].url || ImagenesFormated[0]
-                                }
-                                alt="card-image"
-                                className="object-contain w-full h-full"
-                              />
-                            </div>
+                            // <div className=" text-gray-700 bg-white bg-clip-border rounded-xl h-64">
+                            //   <img
+                            //     src={
+                            //       ImagenesFormated[0].url || ImagenesFormated[0]
+                            //     }
+                            //     alt="card-image"
+                            //     className="object-contain w-full h-full"
+                            //   />
+                            // </div>
+
+                            <CarrouselProductosImagenes
+                              Variantes={ImagenesFormated}
+                            />
                           )}
 
-                          <div className="p-6">
-                            <div className="flex items-center justify-between mb-2">
-                              <p className="block font-sans text-base antialiased font-bold leading-relaxed text-blue-gray-900">
-                                {item.NombreProducto}
-                              </p>
+                          <Link href={`/Productos?ProductoId=${item.id}`}>
+                            <div className="p-6 flex flex-col justify-between">
+                              <div className="flex items-center justify-between mb-2">
+                                <p className=" text-base antialiased font-bold leading-relaxed text-gray-900">
+                                  {item.NombreProducto}
+                                </p>
+                              </div>
+                              <div
+                                className=" text-sm antialiased font-normal leading-normal text-gray-700 line-clamp-3 opacity-80"
+                                dangerouslySetInnerHTML={{
+                                  __html: item.Description,
+                                }}
+                              />
+
+                              <Link href={"/Nosotros"} className="">
+                                <Button className="w-full h-full mt-2 ">
+                                  Mas infomación
+                                </Button>
+                              </Link>
                             </div>
-                            <div
-                              className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-80"
-                              dangerouslySetInnerHTML={{
-                                __html: item.Description,
-                              }}
-                            />
-                          </div>
+                          </Link>
                         </div>
-                      </Link>
+                      </div>
                     </motion.div>
                   );
                 })}
@@ -296,16 +305,17 @@ const HomgePage = () => {
             </motion.div>
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-white  ">
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 bg-white   ">
+          <div className="w-full h-full">
             <img
               src="https://www.pintuco.com.co/wp-content/uploads/2024/02/roller-brush-wall-with-blue-paint-apartment-redecoration-home-construction-while-renovating-improving-repair-decorating-1-1.webp"
               alt="Imagen"
+              className="w-full h-full object-cover"
             />
           </div>
-          <div className="text-center space-y-10 flex flex-col justify-center max-w-sm mx-auto items-center">
+          <div className="text-center space-y-10 flex flex-col justify-center max-w-sm mx-auto items-center py-3">
             <h1 className="block font-bold text-gray-800 text-2xl lg:text-3xl ">
-              ¡Dale vida a tu hogar con los colores Pintuco!
+              ¡Dale vida a tu hogar con nuestros productos!
             </h1>
             <p>
               Escoge los colores que más te gusten y crea miles de combinaciones

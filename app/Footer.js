@@ -38,16 +38,14 @@ const Footer = () => {
                       Preguntas frecuentes
                     </Link>
                   </li>
+
                   <li className="hover:text-Secundario">
-                    <Link href={"/Nutricion"}>Dónde comprar</Link>
+                    <Link href={"/Politica"}>Política de protección </Link>
                   </li>
                   <li className="hover:text-Secundario">
-                    <Link href={"/Compromiso"}>
-                      Nuestro compromiso con la sociedad
+                    <Link href={"/GarantiaProductos"}>
+                      Garantía de productos
                     </Link>
-                  </li>
-                  <li className="hover:text-Secundario">
-                    <Link href={"/Nutricion"}>Garantía de productos</Link>
                   </li>
                   <li className="hover:text-Secundario"></li>
                 </ul>
@@ -63,54 +61,23 @@ const Footer = () => {
               <div className="flex space-x-2 items-center ">
                 <ul>
                   <li className="hover:text-Secundario">
-                    <Link href={"/Delivery"}>Trabaja con nosotros</Link>
+                    <Link href={"/Contacto"}>Trabaja con nosotros</Link>
                   </li>
                   <li className="hover:text-Secundario">
-                    <Link href={"/Reservas"}>Contacto</Link>
+                    <Link href={"/Contacto"}>Contacto</Link>
                   </li>
                   <li className="hover:text-Secundario">
-                    <Link href={"/Reservas"}>
+                    <Link href={"/Contacto"}>
                       ¿Quieres colaborar con nosotros?
                     </Link>
                   </li>
                   <li className="hover:text-Secundario">
-                    <Link href={"/Reservas"}>Aviso Legal</Link>
+                    <Link href={"/AvisoLegal"}>Aviso Legal</Link>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-
-          {/* <div className=" lg:mx-auto  ">
-            <h1 className="font-semibold mb-2 text-xl uppercase">
-              POLÍTICAS Y TÉRMINOS
-            </h1>
-            <hr className="mb-2" />
-            <div className="space-y-2">
-              <div className="flex space-x-2 items-center ">
-                <ul>
-                  <li className="hover:text-Secundario">
-                    <Link href={"/Delivery"}>Términos y Condiciones</Link>
-                  </li>
-                  <li className="hover:text-Secundario">
-                    <Link href={"/PoliticasPrivacidad"}>
-                      Políticas de privacidad
-                    </Link>
-                  </li>
-                  <li className="hover:text-Secundario">
-                    <Link href={"/TerminosCondiciones"}>
-                      Términos y Condiciones
-                    </Link>
-                  </li>
-                  <li className="hover:text-Secundario">
-                    <Link href={"/PromocionesComerciales"}>
-                      Promociones Comerciales
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div> */}
 
           <div className="  sm:col-span-2 lg:col-span-4 ">
             <div className="">
