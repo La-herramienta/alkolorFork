@@ -41,8 +41,8 @@ const Productos = async ({
       <>
         <section className=" bg-gray-50">
           <div className="container px-6 py-8 mx-auto">
-            <div className="lg:flex lg:-mx-2">
-              <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
+            <div className="lg:flex lg:-mx-2 w-full ">
+              <div className="mt-6 lg:mt-0 lg:px-2 lg:w-full w-full ">
                 <section className=" bg-gray-50">
                   <div className="container px-6 py-8 mx-auto">
                     <div className="lg:flex lg:-mx-2">
@@ -67,22 +67,25 @@ const Productos = async ({
                           </Link>
                         ))}
                       </div>
-                      <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
+                      <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5  ">
                         <div className="lg:flex items-center justify-around text-sm tracking-widest uppercase -z-10">
                           <p className=" text-gray-900 flex gap-x-2">
-                            {ProductosSee.length}
+                            {ProductosSee?.length}
                             <span>Productos</span>
                           </p>
                           <div className="pt-2 w-full h-full mx-auto text-gray-800">
                             <InputBuscarProducto Productos={Productos} />
                           </div>
                         </div>
-                        <div className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3 ">
+                        <div
+                          className="grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3  justify-center  items-center w-full
+                        "
+                        >
                           {ProductosSee?.map((producto) => {
-                            const Imagenes =
-                              producto?.ImagenesGenerales.concat(
-                                producto?.Variantes
-                              ) || [];
+                            const Imagenes = [
+                              ...(producto?.ImagenesGenerales || []),
+                              ...(producto?.Variantes || []),
+                            ];
 
                             const ImagenesFormated = Imagenes.filter(
                               (imagen) => imagen.url || imagen.length > 0

@@ -25,8 +25,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import Autoplay from "embla-carousel-autoplay";
 
 const ShowProducto = ({ product, CategoriaName }) => {
+  const Imagenes = [
+    ...(product?.ImagenesGenerales || []),
+    ...(product?.Variantes || []),
+  ];
+
+  const ImagenesFormated = Imagenes.filter(
+    (imagen) => imagen.url || imagen.length > 0
+  );
+  console.log("ImagenesFormated", ImagenesFormated);
+
   return (
     <div className="w-full h-full overflow-auto">
       <Breadcrumb>
@@ -48,33 +59,36 @@ const ShowProducto = ({ product, CategoriaName }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2  gap-2 lg:gap-x-4">
         <div className=" w-[80%] mx-auto h-full">
           <Carousel
-            opts={{
-              loop: true,
-            }}
+            // opts={{
+            //   loop: true,
+            // }}
+            plugins={[
+              Autoplay({
+                delay: 2000,
+              }),
+            ]}
             className="w-full h-full  "
           >
             <CarouselContent className="  ">
-              {product?.ImagenesGenerales?.concat(product?.Variantes)
-                ?.filter((item) => item.url || item.length > 0)
-                .map((image, i) => (
-                  <CarouselItem key={i} className="">
-                    <div className="p-1">
-                      <div className="flex aspect-auto lg:aspect-square items-center justify-center p-2 relative">
-                        <Image
-                          key={image?.key}
-                          src={image?.url || image}
-                          alt={product.title}
-                          width={300}
-                          height={300}
-                          style={{
-                            objectFit: "contain",
-                          }}
-                          className="border rounded-sm"
-                        />
-                      </div>
+              {ImagenesFormated?.map((image, i) => (
+                <CarouselItem key={i} className="">
+                  <div className="p-1">
+                    <div className="flex aspect-auto lg:aspect-square items-center justify-center p-2 relative">
+                      <Image
+                        key={image?.key}
+                        src={image?.url || image}
+                        alt={product.title}
+                        width={180}
+                        height={200}
+                        style={{
+                          objectFit: "cover",
+                        }}
+                        className="border rounded-sm"
+                      />
                     </div>
-                  </CarouselItem>
-                ))}
+                  </div>
+                </CarouselItem>
+              ))}
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
