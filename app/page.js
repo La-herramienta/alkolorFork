@@ -291,7 +291,7 @@ const HomgePage = () => {
 
                               <Link href={"/Nosotros"} className="">
                                 <Button className="w-full h-full mt-2 ">
-                                  Mas infomación
+                                  Mas información
                                 </Button>
                               </Link>
                             </div>
