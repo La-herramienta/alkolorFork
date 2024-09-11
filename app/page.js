@@ -229,7 +229,7 @@ const HomgePage = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-4 gap-4">
+              <div className="grid grid-cols-3 gap-4">
                 {Productos?.map((item, index) => {
                   const Imagenes = [
                     ...(item?.ImagenesGenerales || []),
@@ -289,9 +289,11 @@ const HomgePage = () => {
                                 }}
                               />
 
-                              <Button className="w-full h-full mt-2 ">
-                                Mas infomación
-                              </Button>
+                              <Link href={"/Nosotros"} className="">
+                                <Button className="w-full h-full mt-2 ">
+                                  Mas infomación
+                                </Button>
+                              </Link>
                             </div>
                           </Link>
                         </div>

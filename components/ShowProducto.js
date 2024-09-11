@@ -17,7 +17,7 @@ import {
 } from "./ui/breadcrumb";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { FileIcon, FileSearch, FilesIcon } from "lucide-react";
+import { FileSearch } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -26,17 +26,28 @@ import {
   SelectValue,
 } from "./ui/select";
 import Autoplay from "embla-carousel-autoplay";
+import { useState } from "react";
 
-const ShowProducto = ({ product, CategoriaName }) => {
+const ShowProducto = ({ product }) => {
   const Imagenes = [
     ...(product?.ImagenesGenerales || []),
     ...(product?.Variantes || []),
   ];
 
-  const ImagenesFormated = Imagenes.filter(
-    (imagen) => imagen.url || imagen.length > 0
-  );
-  console.log("ImagenesFormated", ImagenesFormated);
+  const ImagenesFormated =
+    Imagenes?.filter((imagen) => imagen.url || imagen.length > 0) || [];
+
+  const [VarianteSelected, setVarianteSelected] = useState(null);
+
+  let VarianteSelectedImage = null;
+
+  if (VarianteSelected) {
+    VarianteSelectedImage = Imagenes?.findIndex(
+      (img) => img.key == VarianteSelected
+    );
+  }
+
+  console.log("VarianteSelectedImage", VarianteSelectedImage);
 
   return (
     <div className="w-full h-full overflow-auto">
@@ -67,6 +78,9 @@ const ShowProducto = ({ product, CategoriaName }) => {
                 delay: 2000,
               }),
             ]}
+            opts={{
+              loop: true,
+            }}
             className="w-full h-full  "
           >
             <CarouselContent className="  ">
@@ -134,16 +148,16 @@ const ShowProducto = ({ product, CategoriaName }) => {
 
                 <Select
                   onValueChange={(e) => {
-                    console.log(e);
+                    setVarianteSelected(e);
                   }}
-                  className="w-full"
+                  className="w-full capitalize"
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Lista de variantes" />
                   </SelectTrigger>
                   <SelectContent>
                     {product?.Variantes.map((option, key) => (
-                      <SelectItem key={key} value={key}>
+                      <SelectItem className="capitalize" key={key} value={key}>
                         {option.Nombre}
                       </SelectItem>
                     ))}
@@ -174,30 +188,6 @@ const ShowProducto = ({ product, CategoriaName }) => {
             }}
             className="py-2 "
           />
-
-          {/* 
-          <p className="text-yellow-500 text-sm flex space-x-0.5">
-            <span>1</span>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-4 h-4  "
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </span>
-            <span className="text-gray-400 ml-2">3</span>
-          </p> */}
-
-          {/* <p className="text-2xl font-bold mt-2">
-          {product.currency} {product.price}
-        </p> */}
         </div>
       </div>
     </div>
