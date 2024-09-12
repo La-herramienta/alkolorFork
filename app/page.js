@@ -62,28 +62,6 @@ const HomgePage = () => {
     visible: { opacity: 1 },
   };
 
-  // const Categorias = [
-  //   {
-  //     nombre: "Hogar",
-  //     imagen:
-  //       "https://www.pintuco.com.co/wp-content/uploads/2019/12/hogar.webp",
-  //   },
-  //   {
-  //     nombre: "Construcción",
-  //     imagen: `https://www.pintuco.com.co/wp-content/uploads/2019/12/construccion.webp`,
-  //   },
-  //   {
-  //     nombre: "Automotriz",
-  //     imagen:
-  //       "https://www.pintuco.com.co/wp-content/uploads/2019/12/automotriz.webp",
-  //   },
-  //   {
-  //     nombre: "Industrial",
-  //     imagen:
-  //       "https://www.pintuco.com.co/wp-content/uploads/2019/12/industrial.webp",
-  //   },
-  // ];
-
   return (
     <div>
       <Carousel infiniteLoop autoPlay showThumbs={false} showStatus={false}>
@@ -289,7 +267,10 @@ const HomgePage = () => {
                                 }}
                               />
 
-                              <Link href={"/Nosotros"} className="">
+                              <Link
+                                href={`/Productos?ProductoId${item?.id}`}
+                                className=""
+                              >
                                 <Button className="w-full h-full mt-2 ">
                                   Mas información
                                 </Button>

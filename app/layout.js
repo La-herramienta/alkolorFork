@@ -9,26 +9,16 @@ export const metadata = {
   title: "AlKolor",
   description:
     "Descubre nuestra amplia gama de pinturas, ideales para transformar cualquier espacio. Ofrecemos colores vibrantes, acabados de alta calidad y opciones ecológicas. Encuentra la pintura perfecta para tu hogar o oficina y dale vida a tus paredes con nuestros productos premium.",
-  openGraph: {
-    title: "AlKolor - Pinturas de Alta Calidad",
-    description:
-      "Transforma tu espacio con la amplia gama de pinturas de AlKolor. Colores vibrantes, acabados premium y opciones ecológicas para tu hogar u oficina.",
-    url: "https://www.alkolor.co",
-    siteName: "AlKolor",
-    images: [
-      {
-        url: "/Logo.svg",
-        width: 1200,
-        height: 630,
-        alt: "AlKolor Pinturas",
-      },
-    ],
+
+  alternates: {
+    canonical: "/",
+    languages: {
+      "es-CO": "/es-CO",
+    },
   },
-  twitter: {
-    title: "AlKolor - Pinturas de Alta Calidad",
-    description:
-      "Transforma tu espacio con la amplia gama de pinturas de AlKolor. Colores vibrantes, acabados premium y opciones ecológicas para tu hogar u oficina.",
-    image: "/Logo.svg",
+
+  openGraph: {
+    images: "/Banner/BannerNosotros1.jpg",
   },
 };
 
