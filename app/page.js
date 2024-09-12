@@ -289,7 +289,10 @@ const HomgePage = () => {
                                 }}
                               />
 
-                              <Link href={"/Nosotros"} className="">
+                              <Link
+                                href={`/Productos?ProductoId${item?.id}`}
+                                className=""
+                              >
                                 <Button className="w-full h-full mt-2 ">
                                   Mas información
                                 </Button>
